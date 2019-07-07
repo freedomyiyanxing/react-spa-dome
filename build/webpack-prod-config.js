@@ -3,6 +3,7 @@ const webpackMerge = require('webpack-merge');
 const UglifyJs = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpackBaseConfig = require('./webpack-base-config');
 
 module.exports = webpackMerge(webpackBaseConfig, {
@@ -48,6 +49,17 @@ module.exports = webpackMerge(webpackBaseConfig, {
     new MiniCssExtractPlugin({
       filename: 'css/[name]-[hash].css',
     }),
+    new BundleAnalyzerPlugin({ // 可视化工具 http://127.0.0.1:8888
+      analyzerMode: 'server',
+      analyzerHost: '127.0.0.1',
+      analyzerPort: 8888,
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed',
+      openAnalyzer: true,
+      generateStatsFile: false,
+      statsFilename: 'stats.json',
+      logLevel: 'info'
+    })
   ],
   optimization: {
     runtimeChunk: {

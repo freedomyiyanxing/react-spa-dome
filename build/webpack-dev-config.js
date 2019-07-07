@@ -33,7 +33,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
         test: /\.less$/,
         exclude: path.join(__dirname, '../node_modules'),
         use: [
-          'thread-loader',  // 加速编译
+          'thread-loader',  // 加速编译 (基本没效果, 因为项目不够大)
           'style-loader',
           {
             loader: 'css-loader',

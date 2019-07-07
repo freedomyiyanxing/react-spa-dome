@@ -18,7 +18,8 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)?$/,
-        exclude: path.join(__dirname, '../node_modules'),
+        exclude: path.join(__dirname, '../node_modules'), // 排除路径,
+        include: path.resolve(__dirname, '../src'), // 精确需要处理的路径,
         use: [
           'thread-loader',  // 加速编译
           {
