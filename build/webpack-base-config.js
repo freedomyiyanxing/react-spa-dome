@@ -22,6 +22,7 @@ module.exports = {
         include: path.resolve(__dirname, '../src'), // 精确需要处理的路径,
         use: [
           'thread-loader',  // 加速编译
+          'cache-loader', // 缓存
           {
             loader: 'babel-loader',
             options: {
