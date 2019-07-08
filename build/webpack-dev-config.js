@@ -22,13 +22,28 @@ module.exports = webpackMerge(webpackBaseConfig, {
     host: '0.0.0.0',
     hot: true,
     overlay: {
-      errors: true
+      errors: true,
+      warnings: true,
     },
     compress: true, // 开启gzip压缩
     contentBase: path.join(__dirname, '../dist'), // 打包文件目录
   },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: path.join(__dirname, '../node_modules'),
+        use: [
+          'thread-loader',
+          {
+            loader: 'eslint-loader',
+            options: {
+              formatter: require('eslint-friendly-formatter'),
+              emitWarning: true,
+            },
+          }
+        ],
+      },
       {
         test: /\.less$/,
         exclude: path.join(__dirname, '../node_modules'),
