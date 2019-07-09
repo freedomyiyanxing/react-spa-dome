@@ -4,7 +4,9 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'production',
   entry: {
-    vendor: ['react', 'react-dom'],
+    vendor: [
+      'react', 'react-dom', 'prop-types', 'react-helmet', 'react-router-dom', 'uuid', '@loadable/component',
+    ],
   },
   output: {
     path: path.join(__dirname, '../static/js'),

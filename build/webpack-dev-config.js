@@ -25,6 +25,10 @@ module.exports = webpackMerge(webpackBaseConfig, {
       errors: true,
       warnings: true,
     },
+    // historyApiFallback 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html
+    // react-router-dom 就是使用 HTML5 History API实现的
+    // 防止跳转路由时 刷新会出现404页面
+    historyApiFallback: true,
     compress: true, // 开启gzip压缩
     contentBase: path.join(__dirname, '../dist'), // 打包文件目录
   },
@@ -32,7 +36,10 @@ module.exports = webpackMerge(webpackBaseConfig, {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: path.join(__dirname, '../node_modules'),
+        exclude: [
+          path.join(__dirname, '../node_modules'),
+          path.join(__dirname, '../src/common/react-intl-tel-input')
+        ],
         use: [
           'thread-loader',
           {
@@ -42,6 +49,14 @@ module.exports = webpackMerge(webpackBaseConfig, {
               emitWarning: true,
             },
           }
+        ],
+      },
+      {
+        test: /\.css$/,
+        exclude: path.join(__dirname, '../node_modules'),
+        use: [
+          'style-loader',
+          'css-loader',
         ],
       },
       {

@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  BrowserRouter, Switch, Route, Link,
+} from 'react-router-dom';
 
-import Home from './components/home/home';
+import routers from './router/index';
 
 const root = document.getElementById('root');
 
 const App = () => (
-  <Home />
+  <BrowserRouter>
+    <Link to="/">首页</Link>
+    <Link to="/product">产品列表</Link>
+    <Switch>
+      {
+        routers.map(items => (
+          <Route {...items} />
+        ))
+      }
+    </Switch>
+  </BrowserRouter>
 );
 
 ReactDOM.render(<App />, root);

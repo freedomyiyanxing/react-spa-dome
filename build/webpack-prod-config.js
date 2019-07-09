@@ -14,6 +14,18 @@ module.exports = webpackMerge(webpackBaseConfig, {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../',
+            },
+          },
+          'css-loader',
+        ],
+      },
+      {
         test: /\.less$/,
         exclude: path.join(__dirname, '../node_modules'),
         use: [

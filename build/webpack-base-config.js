@@ -32,6 +32,28 @@ module.exports = {
           }
         ],
       },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        exclude: path.join(__dirname, '../node_modules'), // 排除路径,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            limit: 500,
+            outputPath: 'images',
+          }
+        }]
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2|svg)$/,
+        exclude: path.join(__dirname, '../node_modules'), // 排除路径,
+        loader: 'file-loader',
+        options: {
+          options: {
+            limit: 500,
+            outputPath: 'font',
+          }
+        }
+      },
     ],
   },
   plugins: [
